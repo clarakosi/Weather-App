@@ -1,5 +1,5 @@
 * {
-  background-color: #4B0082;
+  background-color: #4b0082;
 }
 
 .container-fluid {
@@ -7,10 +7,24 @@
   padding-top: 100px;
 }
 
-h1, h4, p, footer {
+h1,
+h4,
+p,
+footer {
   color: white;
 }
-
-.button {
+.converter {
   display: none;
+}
+.toggle.ios,
+.toggle-on.ios,
+.toggle-off.ios {
+  border-radius: 20px;
+}
+.toggle.ios .toggle-handle {
+  border-radius: 20px;
+}
+
+.toggle-handle {
+  background-color: white;
 }

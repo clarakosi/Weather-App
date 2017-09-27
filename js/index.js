@@ -15,7 +15,13 @@ $(document).ready(function() {
         "&key=AIzaSyABbAh6ctLsbX9nJT2S3Y6atbraYBECjk4";
 
       $.getJSON(GoogleUrl, function(json) {
-        $("#city").html(json.results[1].formatted_address);
+        $("#city").html(
+          json.results[0].address_components[3].short_name +
+            ", " +
+            json.results[0].address_components[5].short_name +
+            ", " +
+            json.results[0].address_components[6].short_name
+        );
       });
 
       $.getJSON(url, function(json) {
@@ -24,19 +30,14 @@ $(document).ready(function() {
         $("#icon").attr("src", json.weather[0].icon);
       });
 
-      $("[name='my-checkbox']").bootstrapSwitch("onText", " °C");
-      $("[name='my-checkbox']").bootstrapSwitch("offText", " °F");
+      $(".converter").show();
 
-      $("[name='my-checkbox']").bootstrapSwitch("offColor", "success").show();
-
-      $("[name='my-checkbox']").on("switchChange.bootstrapSwitch", function() {
-        if ($("[name='my-checkbox']").bootstrapSwitch("state") === false) {
+      $("#toggle-one").on("change", function() {
+        if ($("#toggle-one").prop("checked") === false) {
           $.getJSON(url, function(json) {
             $("#temp").html(Math.round(json.main.temp * (9 / 5) + 32) + " °F");
           });
-        } else if (
-          $("[name='my-checkbox']").bootstrapSwitch("state") === true
-        ) {
+        } else if ($("#toggle-one").prop("checked") === true) {
           $.getJSON(url, function(json) {
             $("#temp").html(Math.round(json.main.temp) + " °C");
           });
